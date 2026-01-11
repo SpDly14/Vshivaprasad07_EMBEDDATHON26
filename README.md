@@ -35,7 +35,7 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 ## 📹 Video Evidence Links
 
 ### Task 1: The Timing Keeper 🎵
-**Video Link:** [INSERT_TASK1_VIDEO_LINK]  
+**Video Link:** [https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26/blob/main/Task1_TimingKeeper/demo_video.mp4]  
 **Description:** RGB LED timing synchronization with ±5ms precision over 5 minutes  
 
 **Key Demonstration Points:**
@@ -47,7 +47,7 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 ---
 
 ### Task 2: The Priority Guardian ⚔️
-**Video Link:** [INSERT_TASK2_VIDEO_LINK]  
+**Video Link:** [https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26/blob/main/Task2_PriorityGuardian/demo_video.mp4]  
 **Description:** Dual-priority task system with rolling average and distress handling  
 
 **Key Demonstration Points:**
@@ -114,7 +114,7 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 ---
 
 ### Bonus Task: Plankton Whisper 🌊
-**Video Link:** [INSERT_BONUS_VIDEO_LINK]  
+**Video Link:** [https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26/blob/main/BonusTask_PlanktonWhisper/demo_video.mp4]  
 **Description:** Advanced bonus challenge implementation
 
 **Key Demonstration Points:**
@@ -128,10 +128,10 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 ### Prerequisites
 
 **Hardware Required:**
-- ESP32 Development Board (ESP32-WROOM-32 or similar)
-- RGB LED (Common Cathode) with 3x 220Ω resistors
+- ESP32 Development Board (ESP32-WROOM-32)
+- RGB LED (Common Cathode) with 3x 1kΩ resistors
 - SSD1306 OLED Display (128x64 pixels, I2C interface)
-- Push Button with 10kΩ pull-up resistor
+- Push Button
 - Breadboard and jumper wires
 - USB cable for programming
 
@@ -171,10 +171,8 @@ cd Vshivaprasad07_EMBEDDATHON26
 **Pin Connections:**
 
 **RGB LED:**
-- Red → GPIO 25 (+ 220Ω resistor → LED → GND)
-- Green → GPIO 26 (+ 220Ω resistor → LED → GND)
-- Blue → GPIO 27 (+ 220Ω resistor → LED → GND)
-
+- Red → GPIO (varies with Task)
+- Green → GPIO (varies on Task)
 **OLED Display (I2C):**
 - SDA → GPIO 21
 - SCL → GPIO 22
@@ -182,9 +180,8 @@ cd Vshivaprasad07_EMBEDDATHON26
 - GND → GND
 
 **Push Button:**
-- One terminal → GPIO 4
+- One terminal → GPIO (Varies wih task)
 - Other terminal → GND
-- 10kΩ pull-up resistor from GPIO 4 to 3.3V
 
 #### 3. WiFi and MQTT Configuration
 
@@ -460,140 +457,38 @@ VSHIVAPRASAD07_EMBEDDATHON26/
 
 | Task | Metric | Target | Achieved | Status |
 |------|--------|--------|----------|--------|
-| **1. Timing Keeper** | Timing Accuracy | ±5ms | [INSERT_VALUE] | [✅/⏳] |
-| **1. Timing Keeper** | 5-min Stability | No drift | [INSERT_VALUE] | [✅/⏳] |
-| **2. Priority Guardian** | Response Time | <150ms | [INSERT_VALUE] | [✅/⏳] |
-| **2. Priority Guardian** | Rolling Average | 100% accurate | [INSERT_VALUE] | [✅/⏳] |
-| **2. Priority Guardian** | ACK Success Rate | 100% | [INSERT_VALUE] | [✅/⏳] |
-| **3. Window Synchronizer** | Sync Accuracy | ±50ms | [INSERT_VALUE] | [✅/⏳] |
-| **3. Window Synchronizer** | Success Count | ≥3 syncs | [INSERT_VALUE] | [✅/⏳] |
-| **4. Steganography** | Message Extraction | Complete | [INSERT_VALUE] | [✅/⏳] |
-| **4. Steganography** | Image Reconstruction | Lossless | [INSERT_VALUE] | [✅/⏳] |
-| **5. Pixel Sculptor** | SSIM Score | ≥0.70 | [INSERT_VALUE] | [✅/⏳] |
-| **5. Pixel Sculptor** | Transformation | Successful | [INSERT_VALUE] | [✅/⏳] |
-| **6. Sequence Renderer** | Frame Timing | ±20ms | [INSERT_VALUE] | [✅/⏳] |
-| **6. Sequence Renderer** | ACK Success | 100% | [INSERT_VALUE] | [✅/⏳] |
-| **6. Sequence Renderer** | Loop Count | ≥3 loops | [INSERT_VALUE] | [✅/⏳] |
+| **1. Timing Keeper** | Timing Accuracy | ±5ms | [INSERT_VALUE] | [✅] |
+| **1. Timing Keeper** | 5-min Stability | No drift | [INSERT_VALUE] | [✅] |
+| **2. Priority Guardian** | Response Time | <150ms | [INSERT_VALUE] | [✅] |
+| **2. Priority Guardian** | Rolling Average | 100% accurate | [INSERT_VALUE] | [✅] |
+| **2. Priority Guardian** | ACK Success Rate | 100% | [INSERT_VALUE] | [✅] |
+| **3. Window Synchronizer** | Sync Accuracy | ±50ms | [INSERT_VALUE] | [✅] |
+| **3. Window Synchronizer** | Success Count | ≥3 syncs | [INSERT_VALUE] | [✅] |
+| **4. Steganography** | Message Extraction | Complete | [INSERT_VALUE] | [✅] |
+| **4. Steganography** | Image Reconstruction | Lossless | [INSERT_VALUE] | [✅] |
+| **5. Pixel Sculptor** | SSIM Score | ≥0.70 | [INSERT_VALUE] | [⏳] |
+| **5. Pixel Sculptor** | Transformation | Successful | [INSERT_VALUE] | [⏳] |
+| **6. Sequence Renderer** | Frame Timing | ±20ms | [INSERT_VALUE] | [⏳] |
+| **6. Sequence Renderer** | ACK Success | 100% | [INSERT_VALUE] | [⏳] |
+| **6. Sequence Renderer** | Loop Count | ≥3 loops | [INSERT_VALUE] | [⏳] |
 
 **Legend:** ✅ = Passed | ⏳ = In Progress | ❌ = Failed
 
 **Overall Statistics:**
-- **Total Completion Time:** [INSERT_TOTAL_TIME] minutes
-- **Tasks Completed:** 6/6 mandatory + 1 bonus
-- **Overall Success Rate:** [INSERT_PERCENTAGE]%
-- **Zero Disqualifications:** ✓
+- **Tasks Completed:** 4/6 mandatory + 1 bonus
 
 ---
 
 ## 🏆 Key Achievements
 
-✅ **All 6 mandatory tasks completed successfully**  
+✅ **4 mandatory tasks completed successfully**  
 ✅ **1 bonus task (Plankton Whisper) completed**  
-✅ **Zero component failures or disqualifications**  
+✅ **Zero component failures**  
 ✅ **Timing accuracy met or exceeded requirements across all tasks**  
-✅ **SSIM score exceeds excellence threshold (0.75)**  
 ✅ **Clean, well-documented code with comprehensive inline comments**  
 ✅ **Professional video evidence with clear demonstrations**  
-✅ **Comprehensive final report with detailed analysis**  
 ✅ **Repository structure matches all requirements**  
 ✅ **Collaborator `ash29062` added to repository**
-
----
-
-## 🤝 Collaboration & Development
-
-### Division of Work
-
-**Shivaprasad V (Team Lead):**
-- Overall project architecture and planning
-- Task 1, 3, 6 implementation and testing
-- Hardware setup, wiring, and circuit design
-- MQTT protocol integration and debugging
-- Video documentation and recording
-- Repository organization and maintenance
-
-**Manoj Kumar:**
-- Task 2, 4, 5 implementation and testing
-- Image processing algorithms and optimization
-- Steganography and LSB extraction
-- Code optimization and performance tuning
-- Final report writing and documentation
-- Testing and quality assurance
-
-### Development Timeline
-
-**Week 1 (Task 1-2):**
-- Hardware procurement and setup
-- WiFi and MQTT connectivity established
-- Task 1: Timing Keeper implemented and tested
-- Task 2: Priority Guardian with preemption working
-
-**Week 2 (Task 3-4):**
-- Task 3: Window Synchronizer with event groups
-- Task 4: Steganography decoder and LSB extraction
-- Hardware debugging and optimization
-
-**Week 3 (Task 5-6):**
-- Task 5: Optimal Transport algorithm implementation
-- Task 6: OLED video renderer with acknowledgments
-- Integration testing across all tasks
-
-**Week 4 (Final Integration):**
-- Bonus task implementation
-- Comprehensive testing and bug fixes
-- Video recording for all tasks
-- Final report preparation
-- Repository cleanup and documentation
-
----
-
-## 📝 Challenges Faced & Solutions
-
-### Challenge 1: MQTT Message Timing Precision
-**Problem:** Network latency and WiFi instability caused occasional timing violations in Task 2 (Priority Guardian), resulting in response times exceeding 150ms threshold.
-
-**Solution:** 
-- Implemented local message buffering with priority queue
-- Added predictive timing adjustment based on historical latency
-- Switched to FreeRTOS event groups for faster task notification
-- Result: Consistent response times under 130ms
-
-### Challenge 2: ESP32 Memory Constraints for Optimal Transport
-**Problem:** Full optimal transport computation requires significant RAM and processing power, causing ESP32 to run out of memory and crash during Task 5.
-
-**Solution:**
-- Developed hybrid architecture: computation on laptop, execution on ESP32
-- Implemented approximation algorithm (Sinkhorn-Knopp) for on-device processing
-- Used chunked image processing to reduce memory footprint
-- Result: SSIM score of 0.78, exceeding 0.75 excellence threshold
-
-### Challenge 3: OLED Frame Rate Limitations
-**Problem:** I2C bandwidth limiting smooth video playback in Task 6, causing visible stuttering and frame drops.
-
-**Solution:**
-- Optimized I2C clock speed to 400kHz (Fast Mode)
-- Implemented DMA-based transfers where possible
-- Pre-processed and compressed frames before transmission
-- Added double-buffering to smooth transitions
-- Result: Smooth 10 FPS playback with no visible stuttering
-
-### Challenge 4: Button Debouncing in Task 3
-**Problem:** Mechanical button bounce causing false triggers and multiple synchronization attempts.
-
-**Solution:**
-- Hardware debouncing with 100nF capacitor
-- Software debouncing with 50ms window and state machine
-- Interrupt-driven detection for minimal latency
-- Result: Perfect synchronization accuracy within ±35ms
-
-### Challenge 5: Steganography Image Reconstruction
-**Problem:** Base64 decoding on ESP32 causing memory overflow for larger images.
-
-**Solution:**
-- Implemented streaming Base64 decoder
-- Progressive image reconstruction in chunks
-- Validated checksums after each chunk
-- Result: Reliable decoding of 64x64 images without crashes
 
 ---
 
@@ -653,7 +548,7 @@ This work is entirely original and developed by our team during EMBEDDATHON26. A
 **Team Leader:** Shivaprasad V  
 **GitHub:** [SpDly14](https://github.com/SpDly14)  
 **Repository:** [https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26](https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26)  
-**Email:** [Your email if you want to include it]
+**Email:** (spdly2007@gmail.com)
 
 For queries, suggestions, or collaboration opportunities:
 - Open an issue on GitHub
@@ -679,31 +574,3 @@ Through six challenging tasks and one bonus mission, we dove deep into the world
 **The ancient message of ShrimpHub Reef has been decoded, and we emerged as true friends of the reef.**
 
 Thank you to everyone who made this experience possible. We learned far more than we expected, pushed our limits, and created something we're genuinely proud of.
-
-**See you at the awards ceremony! 🦐🏆**
-
----
-
-## 📋 Submission Checklist
-
-- [x] All 6 mandatory tasks completed
-- [x] 1 bonus task completed
-- [x] All code uploaded to GitHub
-- [x] Collaborator `ash29062` added to repository
-- [ ] All video links added to README (replace INSERT_VIDEO_LINK placeholders)
-- [ ] Performance metrics table filled with actual values
-- [ ] Final report PDF completed and uploaded to docs/
-- [ ] Repository structure matches requirements exactly
-- [ ] Build instructions tested and verified
-- [ ] All task-specific READMEs completed
-- [ ] Video quality reviewed (1080p, clear, with stopwatch)
-- [ ] Serial logs included in documentation
-- [ ] Circuit diagrams added to docs/
-- [ ] No placeholder text remaining in documentation
-
----
-
-**Last Updated:** January 11, 2026  
-**Competition:** EMBEDDATHON26 - ShrimpHub: The Encrypted Reef Challenge  
-**Status:** ✅ All Tasks Completed - Ready for Final Submission  
-**Version:** 1.0.0
