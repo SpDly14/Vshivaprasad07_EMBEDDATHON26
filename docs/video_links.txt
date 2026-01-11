@@ -1,10 +1,10 @@
 # Video Links for EMBEDDATHON26 Submission
 
 Task 1: The Timing Keeper
-Link: [INSERT_LINK]
+Link: https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26/blob/main/Task1_TimingKeeper/demo_video.mp4
 
 Task 2: The Priority Guardian
-Link: [INSERT_LINK]
+Link: https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26/blob/main/Task2_PriorityGuardian/demo_video.mp4
 
 Task 3: The Window Synchronizer
 Link: [INSERT_LINK]
@@ -19,4 +19,4 @@ Task 6: The Sequence Renderer
 Link: [INSERT_LINK]
 
 Bonus Task: Plankton Whisper
-Link: [INSERT_LINK]
+Link: https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26/blob/main/BonusTask_PlanktonWhisper/demo_video.mp4
