@@ -1,180 +1,225 @@
-# Task 3: The Window Synchronizer
+# ESP32 MQTT Window Synchronizer (FreeRTOS, Dual‑Core)
 
-## 📋 Task Overview
+## Project Overview
 
-Synchronizing physical button presses with MQTT window events.
+This project implements an **automatic time‑window synchronization system** on an ESP32 using **FreeRTOS with explicit dual‑core task partitioning**.
 
-**Status:** ✅ Completed | ⏳ In Progress | ❌ Not Started
+The ESP32 listens for a *time‑critical “window open” event* over MQTT and **automatically responds within a tightly controlled timing tolerance**. The system is derived from a Python‑based simulator and faithfully reproduces its timing semantics on real hardware.
 
----
+The design emphasizes:
 
-## 🎯 Objectives
-
-- [List specific objectives from the task description]
-- [What needed to be accomplished]
-- [Success criteria]
-
----
-
-## 🔌 Hardware Setup
-
-### Components Used
-- ESP32 Development Board
-- [List other components specific to this task]
-
-### Pin Connections
-```
-[Component] -> ESP32 Pin
-Example:
-Red LED   -> GPIO 25 (via 220Ω resistor)
-Green LED -> GPIO 26 (via 220Ω resistor)
-Blue LED  -> GPIO 27 (via 220Ω resistor)
-```
-
-### Circuit Diagram
-![Circuit Diagram](../docs/task3_circuit.png)
+* Deterministic response timing
+* Clear task isolation across ESP32 cores
+* Robust inter‑task synchronization
+* Transparent debugging via raw MQTT dumps
 
 ---
 
-## 💻 Software Architecture
+## High‑Level Concept
 
-### Task Structure
+A remote controller publishes messages indicating when a **response window opens and closes**.
+
+When the window opens:
+
+1. The ESP32 timestamps the event
+2. Automatically schedules a response **25 ms later**
+3. Publishes a synchronization message
+4. Verifies timing is within **±50 ms tolerance**
+
+After **3 successful synchronizations**, the system waits for a **special Task‑4 challenge code**, delivered via MQTT.
+
+---
+
+## Core Allocation Strategy
+
+| Core       | Responsibility                                                   |
+| ---------- | ---------------------------------------------------------------- |
+| **Core 0** | WiFi + MQTT handling, window detection, auto‑response scheduling |
+| **Core 1** | Button monitoring (manual override), LED state control           |
+
+This separation ensures:
+
+* Network jitter never blocks timing‑critical logic
+* UI and GPIO handling remain responsive
+
+---
+
+## Hardware Configuration
+
+### GPIO Assignments (Right‑side ESP32 pins)
+
+| Component | GPIO  | Notes                                               |
+| --------- | ----- | --------------------------------------------------- |
+| Button    | 13    | Internal pull‑up enabled (optional manual override) |
+| Green LED | 12    | Common‑anode bi‑color LED (LOW = ON)                |
+| Red LED   | 14    | Common‑anode bi‑color LED (LOW = ON)                |
+| LED Anode | 3.3 V | Via current‑limiting resistors (220 Ω)              |
+
+---
+
+## LED State Semantics
+
+| LED State                | Meaning                             |
+| ------------------------ | ----------------------------------- |
+| **Red ON**               | Waiting for window                  |
+| **Green ON**             | Window open (auto‑response pending) |
+| **Yellow (Red + Green)** | Successful synchronization          |
+
+---
+
+## MQTT Configuration
+
+### Broker
+
 ```
-[Describe your FreeRTOS task structure]
-- Task priorities
-- Task responsibilities
-- Inter-task communication
+broker.mqttdashboard.com : 1883
 ```
 
-### Key Functions
-```cpp
-// Main function descriptions
-void taskFunction() {
-    // Purpose and logic
+### Topics
+
+| Purpose                     | Topic                  |
+| --------------------------- | ---------------------- |
+| Window control              | `edrft_window`         |
+| Sync response / Task‑4 code | `cagedmonkey/listener` |
+
+---
+
+## Timing Parameters
+
+| Parameter           | Value  |
+| ------------------- | ------ |
+| Sync tolerance      | ±50 ms |
+| Auto‑response delay | 25 ms  |
+| Required syncs      | 3      |
+| Button debounce     | 20 ms  |
+
+These constants are **compile‑time deterministic** and not adjusted dynamically, ensuring predictable real‑time behavior.
+
+---
+
+## FreeRTOS Synchronization Design
+
+### Shared State Protection
+
+* `windowStateMutex` → protects window open/close state and timestamps
+* `syncCountMutex` → protects successful sync counter
+
+No shared variable is accessed without mutex protection, preventing race conditions across cores.
+
+---
+
+## Window Detection Logic
+
+Incoming MQTT payloads are **raw‑dumped** and parsed using **keyword detection** (case‑insensitive):
+
+### Window Open Triggers
+
+* `bloom`
+* `open`
+* `corals bloom`
+
+### Window Close Triggers
+
+* `close`
+* `krill`
+* `reefing krills`
+
+This design mirrors the Python simulator’s symbolic messaging model rather than relying on rigid JSON formats.
+
+---
+
+## Automatic Response Mechanism
+
+When a window opens:
+
+1. Timestamp captured (`windowOpenTime`)
+2. Auto‑response task dynamically spawned
+3. Task delays exactly **25 ms**
+4. Timestamped sync message published
+
+This approach avoids blocking the MQTT callback while preserving accurate timing.
+
+---
+
+## Sync Validation & Feedback
+
+A synchronization is considered successful if:
+
+```
+|response_time − window_open_time| ≤ 50 ms
+```
+
+On success:
+
+* Sync message is published
+* Yellow LED flashes 3 times
+* Sync counter increments
+
+After 3 successes, the system enters **Task‑4 waiting mode**.
+
+---
+
+## JSON Response Format
+
+```json
+{
+  "status": "synced",
+  "timestamp_ms": 123456
 }
 ```
 
-### Data Flow
-```
-[Describe how data flows through your system]
-MQTT → Processing → Action → Response
-```
+Payloads are logged both as **ASCII** and **hex dumps** for verification.
 
 ---
 
-## 🚀 Implementation Details
+## Manual Override (Optional)
 
-### Approach
-[Explain your implementation approach]
+A physical button allows manual triggering:
 
-### Algorithm/Logic
-[Describe the algorithm or logic used]
-
-### Challenges Faced
-1. **Challenge:** [Description]
-   - **Solution:** [How you solved it]
-
-2. **Challenge:** [Description]
-   - **Solution:** [How you solved it]
+* Valid only while the window is open
+* Subject to the same ±50 ms tolerance
+* Useful for testing and demonstration
 
 ---
 
-## 📊 Results & Performance
+## Why This Design Works
 
-### Metrics Achieved
-| Metric | Target | Achieved | Status |
-|--------|--------|----------|--------|
-| [Metric 1] | [Value] | [Value] | ✅/❌ |
-| [Metric 2] | [Value] | [Value] | ✅/❌ |
-
-### Serial Output Sample
-```
-[Paste relevant serial output showing successful operation]
-```
-
-### Screenshots/Logs
-- [Link to or embed relevant screenshots]
-- [Link to log files]
+* True **real‑time responsiveness** via FreeRTOS scheduling
+* Network‑heavy tasks isolated from timing‑critical logic
+* Deterministic delays (no `delay()` calls)
+* Clean mapping from simulator → hardware
+* Clear visual + serial observability
 
 ---
 
-## 🎥 Video Evidence
+## Intended Evaluation Criteria
 
-**Video Link:** [INSERT_VIDEO_LINK]
+This project demonstrates:
 
-**Video Contents:**
-- [ ] Functionality demonstrated
-- [ ] Stopwatch visible (if required)
-- [ ] Serial monitor showing relevant data
-- [ ] LED indicators working correctly
-- [ ] Timing requirements met
-- [ ] [Any other specific requirements]
+* Dual‑core FreeRTOS mastery
+* MQTT protocol handling under timing constraints
+* Safe concurrency with mutexes
+* Real‑world embedded synchronization patterns
 
 ---
 
-## 📁 Files in This Directory
+## Author / Team
 
-- `*.ino` - Main Arduino sketch
-- `config.h` - Configuration file (WiFi, MQTT credentials)
-- `*.h` - Additional header files
-- `logs.txt` - Execution logs and test results
-- `README.md` - This file
+**Team Name:** Vshivaprasad07
 
 ---
 
-## 🛠️ Build Instructions
+## Usage Context
 
-### Prerequisites
-```bash
-# List any specific libraries or dependencies for this task
-```
+Designed for:
 
-### Compilation
-```bash
-# Arduino IDE: Open .ino file and upload
-# OR
-# PlatformIO:
-cd Task3_TheWindowSynchronizer
-pio run --target upload
-pio device monitor
-```
-
-### Testing
-1. [Step-by-step testing procedure]
-2. [Expected results]
-3. [How to verify success]
+* Embedded systems challenges
+* RTOS demonstrations
+* Time‑sensitive IoT protocols
+* Interview and portfolio review
 
 ---
 
-## 🔍 Code Walkthrough
+## License
 
-### Main Loop
-```cpp
-void loop() {
-    // [Explain what happens in the main loop]
-}
-```
-
-### Key Code Sections
-```cpp
-// [Include and explain important code snippets]
-```
-
----
-
-## 📝 Notes & Observations
-
-### What Worked Well
-- [Things that went smoothly]
-
-### What Could Be Improved
-- [Areas for potential improvement]
-
-### Learning Points
-- [Key learnings from this task]
-
----
-
-**Task Completion Date:** [DATE]  
-**Time Spent:** [HOURS]  
-**Iterations:** [NUMBER]
+Educational and demonstration use.
