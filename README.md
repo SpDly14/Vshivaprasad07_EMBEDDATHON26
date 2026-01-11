@@ -21,7 +21,7 @@
 
 ## 🎯 Project Overview
 
-This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef Challenge". We have successfully completed all 6 mandatory tasks plus 1 bonus task, demonstrating expertise in:
+This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef Challenge". We have successfully completed 4.5 mandatory tasks plus 1 bonus task, demonstrating expertise in:
 
 - ⚡ Real-time embedded systems with FreeRTOS
 - 📡 MQTT protocol and IoT communication  
