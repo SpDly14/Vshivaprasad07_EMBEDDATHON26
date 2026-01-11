@@ -60,7 +60,6 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 ---
 
 ### Task 3: The Window Synchronizer 🪟
-**Video Link:** [INSERT_TASK3_VIDEO_LINK]  
 **Description:** Synchronized button press during MQTT window events (±50ms tolerance)  
 
 **Key Demonstration Points:**
@@ -73,7 +72,6 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 ---
 
 ### Task 4: The Silent Image 🔐
-**Video Link:** [INSERT_TASK4_VIDEO_LINK]  
 **Description:** Steganography decoder extracting hidden messages from images  
 
 **Key Demonstration Points:**
@@ -86,30 +84,11 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 ---
 
 ### Task 5: The Pixel Sculptor 🎨
-**Video Link:** [INSERT_TASK5_VIDEO_LINK]  
 **Description:** Optimal Transport algorithm for pixel rearrangement  
 
 **Key Demonstration Points:**
 - Source image loaded from MQTT
-- Target image fetched via HTTP
-- Optimal transport plan computed
-- Side-by-side comparison: Source → Transformed → Target
-- SSIM score calculated and displayed (≥ 0.70)
-- Transformed image published back to MQTT
-
----
-
-### Task 6: The Sequence Renderer 📺
-**Video Link:** [INSERT_TASK6_VIDEO_LINK]  
-**Description:** OLED display video playback with frame acknowledgments  
-
-**Key Demonstration Points:**
-- OLED display showing smooth video animation
-- Frame-by-frame rendering at correct timing (±20ms)
-- Serial monitor showing frame numbers and acknowledgments
-- Stopwatch visible proving real-time operation
-- At least 3 complete video loops demonstrated
-- No stuttering or frame drops
+- Target image fetched via Manual Download
 
 ---
 
@@ -117,9 +96,6 @@ This repository contains our submission for EMBEDDATHON26 - "The Encrypted Reef 
 **Video Link:** [https://github.com/SpDly14/Vshivaprasad07_EMBEDDATHON26/blob/main/BonusTask_PlanktonWhisper/demo_video.mp4]  
 **Description:** Advanced bonus challenge implementation
 
-**Key Demonstration Points:**
-- [Add specific demonstration points for bonus task]
-- [Include any special features or optimizations]
 
 ---
 
