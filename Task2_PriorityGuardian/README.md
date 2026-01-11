@@ -4,7 +4,7 @@
 
 Dual-priority system handling rolling averages and urgent distress signals.
 
-**Status:** ✅ Completed | ⏳ In Progress | ❌ Not Started
+**Status:** ✅ Completed
 
 ---
 
@@ -20,7 +20,6 @@ Dual-priority system handling rolling averages and urgent distress signals.
 
 ### Components Used
 - ESP32 Development Board
-- [List other components specific to this task]
 
 ### Pin Connections
 ```
